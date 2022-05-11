@@ -1,9 +1,13 @@
 package com.example.java2_library.Controllers;
 
+import com.example.java2_library.Models.Loan;
+import com.example.java2_library.Models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+
+import java.util.ArrayList;
 
 public class MyAccountController {
 
@@ -15,6 +19,7 @@ public class MyAccountController {
 
     @FXML
     private Button buttonNewLoan;
+
 
     @FXML
     private Button buttonReturnLoan;

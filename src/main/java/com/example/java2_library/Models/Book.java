@@ -6,12 +6,16 @@ public class Book {
     private String bookTitle;
     private int year;
     private String bookCategory;
+    private String author;
+    private boolean isNotAvilable;
 
-    public Book(String isbn, String bookTitle, int year, String bookCategory) {
+    public Book(String isbn, String bookTitle, int year, String bookCategory, String a, boolean notavailable) {
         this.isbn = isbn;
         this.bookTitle = bookTitle;
         this.year = year;
         this.bookCategory = bookCategory;
+        author = a;
+        isNotAvilable = notavailable;
     }
 
     public String getIsbn() {
@@ -45,4 +49,20 @@ public class Book {
     public void setBookCategory(String bookCategory) {
         this.bookCategory = bookCategory;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public boolean getNotAvilable() {
+        return isNotAvilable;
+    }
+
+    public void setNotAvilable(boolean notAvilable) {
+        isNotAvilable = notAvilable;
+    }
+
+    public void printInfo() {
+    }
+
 }

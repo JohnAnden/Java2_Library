@@ -13,7 +13,7 @@ public class User {
     private String password;
     private String accountTypeNo;
 
-    public User() {}
+    public User(int idNum, String name, String address, int phoneNum) {}
 
     public User(int userId, String fName, String lName,String dOB,
                 String phoneNo, String street, String postCode, String city,
@@ -124,4 +124,6 @@ public class User {
     {return getlName() + ", " + getfName();
 }
 
+    protected void printInfo() {
+    }
 }
