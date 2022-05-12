@@ -3,15 +3,11 @@ package com.example.java2_library.Models;
 import java.util.ArrayList;
 
     public class Borrower extends User {
-
+        private ArrayList <Loan> borrowedBooks = new ArrayList<>();
         public Borrower(int idNum, String name, String address, int phoneNum) {
             super(idNum, name, address, phoneNum);
         }
 
-
-        private ArrayList<Loan> borrowedBooks;
-
-        borrowedBooks = new ArrayList();
         @Override
         public void printInfo()
         {
@@ -38,4 +34,3 @@ import java.util.ArrayList;
         }
     }
 
-}

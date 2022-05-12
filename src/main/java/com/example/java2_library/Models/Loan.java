@@ -75,10 +75,10 @@ public class Loan {
     public void BookStatus() {
         Boolean available = null;
         if (bookStatus = available)
-        {
             System.out.println(  getBook().getBookTitle() + "Status: available " );
                 else {
             System.out.println(  getBook().getBookTitle() + " Status : not available");
         }
 }
+    }
 
