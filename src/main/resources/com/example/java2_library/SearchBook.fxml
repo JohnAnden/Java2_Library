@@ -5,30 +5,39 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java2_library.Controllers.SearchBookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java2_library.Controllers.SearchBookController">
     <children>
-        <Button fx:id="buttonSearchTitleTextField" layoutX="22.0" layoutY="69.0" mnemonicParsing="false" onAction="#getSearchTitleTextField" prefHeight="26.0" prefWidth="53.0" text="Title" />
-        <TableView fx:id="searchResultsTableView" layoutX="289.0" layoutY="69.0" prefHeight="178.0" prefWidth="291.0">
+        <Button layoutX="19.0" layoutY="302.0" mnemonicParsing="false" onAction="#findTitleButtonPressed" prefHeight="26.0" prefWidth="53.0" text="Title" />
+        <TableView fx:id="tableViewSearchBook" layoutX="46.0" layoutY="41.0" prefHeight="178.0" prefWidth="783.0">
             <columns>
-                <TableColumn prefWidth="51.20001220703125" text="ISBN" />
-                <TableColumn prefWidth="86.39996337890625" text="Author" />
-                <TableColumn prefWidth="56.00006103515625" text="Title" />
-                <TableColumn prefWidth="113.5999755859375" text="Year" />
+                <TableColumn fx:id="isbnColumn" prefWidth="103.99996948242188" text="ISBN" />
+                <TableColumn fx:id="bookTitleColumn" prefWidth="78.66668701171875" text="Book Title" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="123.33331298828125" text="First Name" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="277.3333740234375" text="Last Name" />
+            <TableColumn fx:id="bookCategoryColumn" prefWidth="110.0" text="Book Category" />
+            <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Year" />
             </columns>
         </TableView>
-        <Button fx:id="buttonLogin" layoutX="26.0" layoutY="343.0" mnemonicParsing="false" onAction="#checkLoginTrue" text="Login" />
-        <Button fx:id="buttonSearchAuthorTextField" layoutX="22.0" layoutY="119.0" mnemonicParsing="false" onAction="#getSearchAuthorTextField" text="Author" />
-        <Button fx:id="buttonSearchYearTextField" layoutX="21.0" layoutY="223.0" mnemonicParsing="false" onAction="#getSearchYearTextField" prefHeight="26.0" prefWidth="53.0" text="Year" />
-        <TextField fx:id="searchTitleTextField" layoutX="93.0" layoutY="69.0" promptText="Title" />
-        <TextField fx:id="searchAuthorTextField" layoutX="97.0" layoutY="119.0" promptText="Author" />
-        <TextField fx:id="searchYearTextField" layoutX="97.0" layoutY="223.0" promptText="Year" />
-        <Text layoutX="22.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search item" wrappingWidth="72.00003662109373" />
-        <Button fx:id="buttonSearchIsbnTextField" layoutX="22.0" layoutY="273.0" mnemonicParsing="false" onAction="#getSearchIsbnTextField" prefHeight="26.0" prefWidth="53.0" text="ISBN" />
-        <TextField fx:id="searchIsbnTextField" layoutX="97.0" layoutY="273.0" promptText="ISBN" />
-        <Text layoutX="289.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search results" wrappingWidth="72.00003662109373" />
-        <Button fx:id="ButtonSearchActorTextField" layoutX="25.0" layoutY="167.0" mnemonicParsing="false" onAction="#getSearchActorTextField" text="Actor" />
-        <TextField fx:id="searchActorTextField" layoutX="97.0" layoutY="167.0" promptText="Actor" />
+        <Button layoutX="305.0" layoutY="479.0" mnemonicParsing="false" onAction="#OnPressedLogIn" text="Login" />
+        <Button layoutX="19.0" layoutY="344.0" mnemonicParsing="false" onAction="#findFirstNameButtonPressed" text="First Name" />
+        <Button layoutX="19.0" layoutY="435.0" mnemonicParsing="false" onAction="#findYearButtonPressed" prefHeight="26.0" prefWidth="53.0" text="Year" />
+        <TextField fx:id="titleTextField" layoutX="110.0" layoutY="302.0" promptText="Title" />
+        <TextField fx:id="fNameTextField" layoutX="110.0" layoutY="344.0" promptText="Author's First Name" />
+        <TextField fx:id="yearTextField" layoutX="110.0" layoutY="435.0" promptText="Year" />
+        <Text layoutX="24.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Book" wrappingWidth="137.33334960937498">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+        <Button layoutX="19.0" layoutY="479.0" mnemonicParsing="false" onAction="#findISBNButtonPressed" prefHeight="26.0" prefWidth="53.0" text="ISBN" />
+        <TextField fx:id="isbnTextField" layoutX="110.0" layoutY="479.0" promptText="ISBN" />
+        <Text layoutX="15.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search results" wrappingWidth="115.33334960937498">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+        <Button layoutX="24.0" layoutY="390.0" mnemonicParsing="false" onAction="#findLastNameButtonPressed" text="Last Name" />
+        <TextField fx:id="lNameTextFiled" layoutX="110.0" layoutY="390.0" promptText="Author's Last Name" />
     </children>
 </AnchorPane>

@@ -1,77 +1,182 @@
 package com.example.java2_library.Controllers;
 
+import com.example.java2_library.Models.Book;
+import com.example.java2_library.Models.BookQueries;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.List;
 
 public class SearchBookController {
+    @FXML
+    private TableColumn<Book, String> bookCategoryColumn;
 
     @FXML
-    private Button ButtonSearchActorTextField;
+    private TableColumn<Book, String> bookTitleColumn;
 
     @FXML
-    private Button buttonLogin;
+    private TableColumn<Book, String> firstNameColumn;
 
     @FXML
-    private Button buttonSearchAuthorTextField;
+    private TableColumn<Book, String> isbnColumn;
 
     @FXML
-    private Button buttonSearchIsbnTextField;
+    private TableColumn<Book, String> lastNameColumn;
 
     @FXML
-    private Button buttonSearchTitleTextField;
+    private TableView<Book> tableViewSearchBook;
 
     @FXML
-    private Button buttonSearchYearTextField;
+    private TableColumn<Book, String> yearColumn;
 
     @FXML
-    private TextField searchActorTextField;
+    private TextField titleTextField;
 
     @FXML
-    private TextField searchAuthorTextField;
+    private TextField fNameTextField;
 
     @FXML
-    private TextField searchIsbnTextField;
+    private TextField lNameTextFiled;
 
     @FXML
-    private TableView<?> searchResultsTableView;
+    private TextField yearTextField;
 
     @FXML
-    private TextField searchTitleTextField;
+    private TextField isbnTextField;
 
-    @FXML
-    private TextField searchYearTextField;
 
-    @FXML
-    void checkLoginTrue(ActionEvent event) {
+    private final BookQueries bookqueries = new BookQueries();
+    private ObservableList<Book> books = FXCollections.observableArrayList();
+
+    public void initialize(){
+        tableViewSearchBook.setItems(books);
+        getAllEntries();
+
+        tableViewSearchBook.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, oldValue, newValue) -> {
+
+                } );
+
+    }
+
+    private void getAllEntries(){
+        books.setAll(bookqueries.getAllBooks());
+        selectFirstEntry();
+    }
+    private void selectFirstEntry(){
+        tableViewSearchBook.getSelectionModel().selectFirst();
+    }
+
+    @FXML // list all books
+    void listBookPressed(ActionEvent event) {
+        getAllEntries();
+        columnTitle();
 
     }
 
     @FXML
-    void getSearchActorTextField(ActionEvent event) {
+    void findTitleButtonPressed(ActionEvent event) {
+        List<Book> bookList = bookqueries.getBooksByTitle(titleTextField.getText() + "%");
+        getAllEntries();
 
+        columnTitle();
+
+        if (books.size() > 0) {
+            books.setAll(bookList);
+            selectFirstEntry();
+        }
+        else{
+            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
+        }
     }
 
     @FXML
-    void getSearchAuthorTextField(ActionEvent event) {
+    void findFirstNameButtonPressed(ActionEvent event) {
+        List<Book> bookList = bookqueries.getBooksByFName(fNameTextField.getText() + "%");
+        getAllEntries();
 
+        columnTitle();
+
+        if (books.size() > 0) {
+            books.setAll(bookList);
+            selectFirstEntry();
+        }
+        else{
+            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
+        }
     }
 
     @FXML
-    void getSearchIsbnTextField(ActionEvent event) {
+    void findLastNameButtonPressed(ActionEvent event) {
 
+        List<Book> bookList = bookqueries.getBooksByLName( lNameTextFiled.getText() + "%");
+        getAllEntries();
+        columnTitle();
+
+        if (books.size() > 0) {
+            books.setAll(bookList);
+            selectFirstEntry();
+        }
+        else{
+            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
+        }
     }
 
     @FXML
-    void getSearchTitleTextField(ActionEvent event) {
+    void findYearButtonPressed(ActionEvent event) {
+        List<Book> bookList = bookqueries.getBooksByYear( yearTextField.getText() + "%");
+        getAllEntries();
+        columnTitle();
 
+        if (books.size() > 0) {
+            books.setAll(bookList);
+            selectFirstEntry();
+        }
+        else{
+            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
+        }
     }
 
     @FXML
-    void getSearchYearTextField(ActionEvent event) {
+    void findISBNButtonPressed(ActionEvent event) {
+        List<Book> bookList = bookqueries.getBooksByISBN(isbnTextField.getText() + "%");
+        getAllEntries();
 
+        columnTitle();
+
+        if (books.size() > 0) {
+            books.setAll(bookList);
+            selectFirstEntry();
+        }
+        else{
+            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
+        }
     }
 
+
+
+
+    public void columnTitle(){
+        isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+        bookTitleColumn.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        bookCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("bookCategory"));
+        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+    }
+    public void displayAlert(Alert.AlertType type, String title, String message){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
