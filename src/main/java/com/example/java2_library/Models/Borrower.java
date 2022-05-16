@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
     public class Borrower extends User {
         private ArrayList <Loan> borrowedBooks = new ArrayList<>();
-        public Borrower(int idNum, String name, String address, int phoneNum) {
-            super(idNum, name, address, phoneNum);
+
+        public Borrower(int userId, String fName, String lName, int employeeNo) {
+            super(userId, fName, lName, employeeNo);
         }
 
         @Override

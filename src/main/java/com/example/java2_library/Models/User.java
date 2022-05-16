@@ -13,11 +13,12 @@ public class User {
     private String password;
     private String accountTypeNo;
 
-    public User(int idNum, String name, String address, int phoneNum) {}
+    private String userName;
 
-    public User(int userId, String fName, String lName,String dOB,
-                String phoneNo, String street, String postCode, String city,
-                String email, String password, String accountTypeNo) {
+    private int employeeNo;
+
+    public User(int userId, String fName, String lName,
+                int employeeNo) {
         setUserId(userId);
         setfName(fName);
         setlName(lName);
@@ -32,6 +33,13 @@ public class User {
 
     }
 
+    public void setUsername(String username) {
+        this.userName = username;
+    }
+
+    public void setUsername(int employeeNo) {
+        this.employeeNo = employeeNo;
+    }
     public int getUserId() {
         return userId;
     }
@@ -119,6 +127,23 @@ public class User {
     public void setAccountTypeNo(String accountTypeNo) {
         this.accountTypeNo = accountTypeNo;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getEmployeeNo() {
+        return employeeNo;
+    }
+
+    public void setEmployeeNo(int employeeNo) {
+        this.employeeNo = employeeNo;
+    }
+
     @Override
     public String toString()
     {return getlName() + ", " + getfName();

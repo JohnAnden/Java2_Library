@@ -68,6 +68,9 @@ public class Book {
     public void setYear(String year){
         this.year = new SimpleStringProperty(year);
     }
+
+    public void printInfo() {
+    }
 }
 
 
