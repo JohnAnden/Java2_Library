@@ -9,19 +9,13 @@ import javafx.scene.control.TextField;
 public class LoginController {
 
     @FXML
-    private Button cancelButton;
-
-    @FXML
-    private TextField employeeNoTextField;
-
-    @FXML
-    private Button loginButton;
+    private TextField employeeIdTextField;
 
     @FXML
     private PasswordField passwordTextField;
 
     @FXML
-    private TextField usernameTextField;
+    private TextField userIdTextField;
 
     @FXML
     void checkLoginTrue(ActionEvent event) {
