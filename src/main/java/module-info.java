@@ -5,5 +5,7 @@ module com.example.java2_library {
 
 
     opens com.example.java2_library to javafx.fxml;
+    opens com.example.java2_library.Controllers to javafx.fxml ;
+    opens com.example.java2_library.Models to javafx.base;
     exports com.example.java2_library;
 }

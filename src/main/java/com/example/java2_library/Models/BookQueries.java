@@ -1,5 +1,4 @@
 package com.example.java2_library.Models;
-
 import com.example.java2_library.DbConnection;
 
 import java.sql.PreparedStatement;
@@ -202,7 +201,7 @@ public class BookQueries {
             List<Book> results = new ArrayList<Book>();
             while (resultSet.next()) {
                 results.add(new Book(
-                        resultSet.getString("isbn"),
+                        resultSet.getString("ISBN"),
                         resultSet.getString("bookTitle"),
                         resultSet.getString("fName"),
                         resultSet.getString("lName"),

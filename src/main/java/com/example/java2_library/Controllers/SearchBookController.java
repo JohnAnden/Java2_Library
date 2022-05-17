@@ -1,5 +1,6 @@
 package com.example.java2_library.Controllers;
 
+import com.example.java2_library.HelloApplication;
 import com.example.java2_library.Models.Book;
 import com.example.java2_library.Models.BookQueries;
 import javafx.collections.FXCollections;
@@ -11,8 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -129,8 +128,8 @@ public class SearchBookController {
 // Knapp som går till inloggningsvyn
     @FXML
     void loginButtonPressed(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/java2_library/Login.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
