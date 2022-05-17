@@ -21,5 +21,6 @@ public class HelloApplication extends Application {
         DbConnection dbConnection = new DbConnection(); // metod som kontaktar databasen.
         dbConnection.getConnection();
         launch();
+
     }
 }

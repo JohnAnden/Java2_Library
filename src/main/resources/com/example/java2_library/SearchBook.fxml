@@ -21,7 +21,7 @@
             <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Year" />
             </columns>
         </TableView>
-        <Button layoutX="305.0" layoutY="479.0" mnemonicParsing="false" onAction="#OnPressedLogIn" text="Login" />
+        <Button layoutX="305.0" layoutY="479.0" mnemonicParsing="false" onAction="#loginButtonPressed" text="Login" />
         <Button layoutX="19.0" layoutY="344.0" mnemonicParsing="false" onAction="#findFirstNameButtonPressed" text="First Name" />
         <Button layoutX="19.0" layoutY="435.0" mnemonicParsing="false" onAction="#findYearButtonPressed" prefHeight="26.0" prefWidth="53.0" text="Year" />
         <TextField fx:id="titleTextField" layoutX="110.0" layoutY="302.0" promptText="Title" />

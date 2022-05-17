@@ -216,16 +216,6 @@ public class BookQueries {
         }
     }
 
-
-
-    public void close() {
-        try {
-            connect.getConnection().close();
-        } catch (SQLException sqlException) {
-
-            sqlException.printStackTrace();
-        }
-    }
 }
 
 

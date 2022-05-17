@@ -6,13 +6,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SearchBookController {
@@ -52,6 +58,10 @@ public class SearchBookController {
     @FXML
     private TextField isbnTextField;
 
+    // Till login-knappen som går till Login-vyn.
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     private final BookQueries bookqueries = new BookQueries();
     private ObservableList<Book> books = FXCollections.observableArrayList();
@@ -64,9 +74,9 @@ public class SearchBookController {
                 (observableValue, oldValue, newValue) -> {
 
                 } );
-
     }
 
+    // Sökning för varje knapp.
     private void getAllEntries(){
         books.setAll(bookqueries.getAllBooks());
         selectFirstEntry();
@@ -75,43 +85,20 @@ public class SearchBookController {
         tableViewSearchBook.getSelectionModel().selectFirst();
     }
 
-    @FXML // list all books
-    void listBookPressed(ActionEvent event) {
-        getAllEntries();
-        columnTitle();
-
-    }
-
     @FXML
     void findTitleButtonPressed(ActionEvent event) {
         List<Book> bookList = bookqueries.getBooksByTitle(titleTextField.getText() + "%");
         getAllEntries();
-
         columnTitle();
-
-        if (books.size() > 0) {
-            books.setAll(bookList);
-            selectFirstEntry();
-        }
-        else{
-            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
-        }
+        listBooks(bookList, books);
     }
 
     @FXML
     void findFirstNameButtonPressed(ActionEvent event) {
         List<Book> bookList = bookqueries.getBooksByFName(fNameTextField.getText() + "%");
         getAllEntries();
-
         columnTitle();
-
-        if (books.size() > 0) {
-            books.setAll(bookList);
-            selectFirstEntry();
-        }
-        else{
-            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
-        }
+        listBooks(bookList, books);
     }
 
     @FXML
@@ -120,14 +107,7 @@ public class SearchBookController {
         List<Book> bookList = bookqueries.getBooksByLName( lNameTextFiled.getText() + "%");
         getAllEntries();
         columnTitle();
-
-        if (books.size() > 0) {
-            books.setAll(bookList);
-            selectFirstEntry();
-        }
-        else{
-            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
-        }
+        listBooks(bookList, books);
     }
 
     @FXML
@@ -135,35 +115,28 @@ public class SearchBookController {
         List<Book> bookList = bookqueries.getBooksByYear( yearTextField.getText() + "%");
         getAllEntries();
         columnTitle();
-
-        if (books.size() > 0) {
-            books.setAll(bookList);
-            selectFirstEntry();
-        }
-        else{
-            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
-        }
+        listBooks(bookList, books);
     }
 
     @FXML
     void findISBNButtonPressed(ActionEvent event) {
         List<Book> bookList = bookqueries.getBooksByISBN(isbnTextField.getText() + "%");
         getAllEntries();
-
         columnTitle();
-
-        if (books.size() > 0) {
-            books.setAll(bookList);
-            selectFirstEntry();
-        }
-        else{
-            displayAlert(Alert.AlertType.INFORMATION, "Title not found", "Cannot find entry with specified title");
-        }
+        listBooks(bookList, books);
     }
 
+// Knapp som går till inloggningsvyn
+    @FXML
+    void loginButtonPressed(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
-
-
+    // metod som sätter CellValueFactory för TableView.
     public void columnTitle(){
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         bookTitleColumn.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
@@ -173,10 +146,10 @@ public class SearchBookController {
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
 
     }
-    public void displayAlert(Alert.AlertType type, String title, String message){
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
+    // Lista för sökningen
+    public void listBooks(List<Book> bookList, ObservableList<Book> books) {
+        books.setAll(bookList);
+        selectFirstEntry();
     }
+
 }
