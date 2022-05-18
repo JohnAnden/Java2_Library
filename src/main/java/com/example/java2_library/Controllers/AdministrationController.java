@@ -10,94 +10,65 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
+import static com.example.java2_library.DbConnection.getConnection;
+
 
 public class AdministrationController {
 
     @FXML
     private TextField isbnTextField;
-
     @FXML
     private TextField authorFNameTextField;
-
     @FXML
     private TextField authorLNameTextField;
-
     @FXML
     private TextField bookCategoryTextField;
-
     @FXML
     private TextField bookTitleTextField;
-
     @FXML
     private TextField bookYearTextField;
-
     @FXML
     private TextField dvdActorFNameTextField;
-
     @FXML
     private TextField dvdActorLNameTextField;
-
     @FXML
     private TextField dvdCategoryTextField;
-
     @FXML
     private TextField dvdIdTextField;
-
     @FXML
     private TextField dvdTitleTextField;
-
     @FXML
     private TextField dvdYearTextField;
-
     @FXML
     private TableView<?> overdueLoansTableView1;
-
     @FXML
     private TableView<?> searchResultsTableView;
-
     @FXML
-    void addBookToDb(ActionEvent event) {
-        addBookToDatabase();
-
-    }
-
+    void addBookToDb(ActionEvent event) {addBookToDatabase();}
     @FXML
     void addDvdToDb(ActionEvent event) {
         addDvdToDatabase();
     }
-
     @FXML
-    void getOverdueLoans(ActionEvent event) {
-
-    }
-
+    void getOverdueLoans(ActionEvent event) {}
     @FXML
     void removeBookFromDb(ActionEvent event) {
         removeBookFromDatabase();
     }
-
     @FXML
-    void removeDvdFromDb(ActionEvent event) {
-        removeDvdFromDatabase();
-    }
-
+    void removeDvdFromDb(ActionEvent event) {removeDvdFromDatabase();}
     @FXML
-    void setCurrentViewSearchBook(ActionEvent event) {
-
-    }
+    void setCurrentViewSearchBook(ActionEvent event) {}
 
     private PreparedStatement insertNewBookIntoBook;
     private PreparedStatement insertNewBookIntoAuthorship;
     private PreparedStatement insertNewBookIntoAuthor;
-
     private PreparedStatement removeBookFromBook;
     private PreparedStatement removeBookFromAuthorship;
     private PreparedStatement removeBookFromAuthor;
-
     private PreparedStatement insertNewDvdIntoDvd;
     private PreparedStatement insertNewDvdIntoDvdActorship;
     private PreparedStatement insertNewDvdIntoActor;
-
     private PreparedStatement removeDvdFromDvd;
     private PreparedStatement removeDvdFromDvdActorship;
     private PreparedStatement removeDvdFromActor;
@@ -105,8 +76,8 @@ public class AdministrationController {
     public int addBookToDatabase() {
 
         try {
-            insertNewBookIntoBook = getConnection().prepareStatement("INSERT INTO Books " +
-                    "(isbn, bookTitle, year, bookCategory)" +
+            insertNewBookIntoBook = getConnection().prepareStatement("INSERT INTO \"Books\" " +
+                    "(\"Books\".\"isbn\", \"Books\".\"bookTitle\", \"Books\".\"year\", \"Books\".\"bookCategory\")" +
                     "VALUES (?, ?, ?, ?)");
 
             insertNewBookIntoBook.setString(1, isbnTextField.getText());
@@ -121,8 +92,8 @@ public class AdministrationController {
 
             try{
 
-                insertNewBookIntoAuthorship = getConnection().prepareStatement("INSERT INTO BookAuthorship" +
-                        "(bookAuthorship, isbn, authorId)" +
+                insertNewBookIntoAuthorship = getConnection().prepareStatement("INSERT INTO \"BookAuthorship\"" +
+                        "(\"BookAuthorship\".\"bookAuthorship\", \"BookAuthorship\".\"isbn\", \"BookAuthorship\".\"authorId\")" +
                         "VALUES (?, ?, ?)");
 
                 insertNewBookIntoAuthorship.setInt(1, Integer.parseInt("authorshipId"));
@@ -135,8 +106,8 @@ public class AdministrationController {
                 System.exit(1);
 
                 try{
-                    insertNewBookIntoAuthor = getConnection().prepareStatement("INSERT INTO Author" +
-                            "(authorId, lName, fName, authorRank)" +
+                    insertNewBookIntoAuthor = getConnection().prepareStatement("INSERT INTO \"Author\"" +
+                            "(\"Author\".\"authorId\", \"Author\".\"lName\", \"Author\".\"fName\", \"Author\".\"authorRank\")" +
                             "VALUES (?, ?, ?, ?)");
 
                     insertNewBookIntoAuthor.setInt(1, Integer.parseInt("authorId"));
@@ -148,7 +119,6 @@ public class AdministrationController {
                 } catch (SQLException sqlException3) {
                     sqlException.printStackTrace();
                     System.exit(1);
-
                 }
                 return 0;
             }
@@ -157,8 +127,8 @@ public class AdministrationController {
     public int removeBookFromDatabase() {
 
         try {
-            removeBookFromBook = getConnection().prepareStatement("DELETE FROM Book" +
-                    "(isbn, bookTitle, year, bookCategory)" +
+            removeBookFromBook = getConnection().prepareStatement("DELETE FROM \"Book\""+
+                    "(\"Books\".\"isbn\", \"Books\".\"bookTitle\", \"Books\".\"year\", \"Books\".\"bookCategory\")" +
                     "VALUES (?, ?, ?, ?)");
 
             removeBookFromBook.setString(1, isbnTextField.getText());
@@ -173,8 +143,8 @@ public class AdministrationController {
         }
 
         try {
-            removeBookFromAuthorship = getConnection().prepareStatement("DELETE FROM BookAuthorship" +
-                    "(bookAuthorship, isbn, authorId)" +
+            removeBookFromAuthorship = getConnection().prepareStatement("DELETE FROM \"BookAuthorship\"" +
+                    "(\"BookAuthorship\".\"bookAuthorship\", \"BookAuthorship\".\"isbn\", \"BookAuthorship\".\"authorId\")" +
                     "VALUES (?, ?, ?)");
 
             removeBookFromAuthorship.setString(1, "authorshipId");
@@ -186,9 +156,10 @@ public class AdministrationController {
             sqlException5.printStackTrace();
             System.exit(1);
         }
+
         try {
-            removeBookFromAuthor = getConnection().prepareStatement("DELETE FROM Author" +
-                    "(authorId, fName, lName, authorRank)" +
+            removeBookFromAuthor = getConnection().prepareStatement("DELETE FROM \"Author\"" +
+                    "(\"Author\".\"authorId\", \"Author\".\"fName\", \"Author\".\"lName\", \"Author\".\"authorRank\")" +
                     "VALUES (?,?,?,?)");
 
             removeBookFromAuthor.setInt(1, Integer.parseInt("authorId"));
@@ -202,14 +173,13 @@ public class AdministrationController {
             System.exit(1);
         }
         return 0;
-
     }
 
     public int addDvdToDatabase() {
 
         try {
-            insertNewDvdIntoDvd = getConnection().prepareStatement("INSERT INTO DVD" +
-                    "(dvdId, dvdTitle, year, dvdCategory)" +
+            insertNewDvdIntoDvd = getConnection().prepareStatement("INSERT INTO \"DVD\"" +
+                    "(\"DVD\".\"dvdId\", \"DVD\".\"dvdTitle\", \"DVD\".\"year\", \"DVD\".\"dvdCategory\")" +
                     "VALUES (?, ?, ?, ?)");
 
             insertNewDvdIntoDvd.setString(1, dvdIdTextField.getText());
@@ -224,8 +194,8 @@ public class AdministrationController {
         }
 
         try {
-            insertNewDvdIntoDvdActorship = getConnection().prepareStatement("INSERT INTO dvdActorship" +
-                    "(dvdActorship, dvdId, ActorId)" +
+            insertNewDvdIntoDvdActorship = getConnection().prepareStatement("INSERT INTO \"dvdActorship\"" +
+                    "(\"dvdActorship\".\"dvdActorship\", \"dvdActorship\".\"dvdId\", \"dvdActorship\".\"ActorId\")" +
                     "VALUES (?, ?, ?)");
 
             insertNewDvdIntoDvdActorship.setString(1, "dvdActorship");
@@ -239,8 +209,8 @@ public class AdministrationController {
         }
 
         try {
-            insertNewDvdIntoActor = getConnection().prepareStatement("INSERT INTO Actor" +
-                    "(actorId, lName, fName, actorRank)" +
+            insertNewDvdIntoActor = getConnection().prepareStatement("INSERT INTO \"Actor\"" +
+                    "(\"Actor\".\"actorId\", \"Actor\".\"lName\", \"Actor\".\"fName\", \"Actor\".\"actorRank\")" +
                     "VALUES (?, ?, ?, ?)");
             insertNewDvdIntoActor.setInt(1, Integer.parseInt("actorid"));
             insertNewDvdIntoActor.setString(2, dvdActorLNameTextField.getText());
@@ -257,8 +227,8 @@ public class AdministrationController {
 
     public int removeDvdFromDatabase(){
         try{
-            removeDvdFromDvd = getConnection().prepareStatement("DELETE FROM Dvd" +
-                    "(dvdId, dvdTitle, year, dvdCategory)" +
+            removeDvdFromDvd = getConnection().prepareStatement("DELETE FROM \"Dvd\"" +
+                    "(\"Dvd\".\"dvdId\", \"Dvd\".\"dvdTitle\", \"Dvd\".\"year\", \"Dvd\".\"dvdCategory\")" +
                     "VALUES (?, ?, ?, ?)");
             removeDvdFromDvd.setInt(1, Integer.parseInt("dvdId"));
             removeDvdFromDvd.setString(2, dvdTitleTextField.getText());
@@ -271,8 +241,8 @@ public class AdministrationController {
             System.exit(1);
         }
         try {
-            removeDvdFromDvdActorship = getConnection().prepareStatement("DELETE FROM DvdActorship" +
-                    "(dvdActorshipId, dvdId, actorId)" +
+            removeDvdFromDvdActorship = getConnection().prepareStatement("DELETE FROM \"DvdActorship\"" +
+                    "(\"dvdActorship\".\"dvdActorshipId\", \"dvdActorship\".\"dvdId\", \"dvdActorship\".\"actorId\")" +
                     "VALUES (?, ?, ?)");
             removeDvdFromDvdActorship.setInt(1, Integer.parseInt("dvdActorshipId"));
             removeDvdFromDvdActorship.setInt(2, Integer.parseInt("dvdId"));
@@ -284,8 +254,8 @@ public class AdministrationController {
             System.exit(1);
         }
         try {
-            removeDvdFromActor = getConnection().prepareStatement("DELETE FROM Actor" +
-                    "(actorId, lName, fName, actorRank)" +
+            removeDvdFromActor = getConnection().prepareStatement("DELETE FROM \"Actor\"" +
+                    "(\"Actor\".\"actorId\", \"Actor\".\"lName\", \"Actor\".\"fName\", \"Actor\".\"actorRank\")" +
                     "VALUES (?, ?, ?, ?)");
             removeDvdFromActor.setInt(1, Integer.parseInt("actorId"));
             removeDvdFromActor.setString(2, dvdActorLNameTextField.getText());
@@ -293,12 +263,10 @@ public class AdministrationController {
             removeDvdFromActor.setString(4, "actorRank");
             return removeDvdFromActor.executeUpdate();
 
-
         }catch (SQLException sqlException12){
             sqlException12.printStackTrace();
             System.exit(1);
         }
-
         return 0;
     }
 }
